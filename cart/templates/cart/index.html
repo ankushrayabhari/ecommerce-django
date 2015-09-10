@@ -1,0 +1,28 @@
+{% load mathfilters %}
+<table border="1">
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Quantity</th>
+		<th>Subtotal</th>
+		<th>Remove</th>
+	</tr>
+		{% for item in user.customer.cartitem_set.all %}
+			<tr>
+				<td>{{ item.product.first.name }}</td>
+				<td>{{ item.product.first.price }}</td>
+				<td>
+					<form action="{% url 'cart:update' item.pk %}" method="post">
+						{% csrf_token %}
+						<input type="number" min="1" name="quantity" value="{{ item.quantity }}" />
+						<input type="submit" value="Change" />
+					</form>
+				</td>
+				<td>{{ item.quantity|mul:item.product.first.price }}</td>
+				<td><a href="{% url 'cart:remove' item.pk %}">Remove From Cart</a></td>
+			</tr>
+		{% endfor %}
+</table>
+
+<a href="{% url 'product:index' %}"> Products </a> <br>
+<a href="{% url 'main:index' %}"> Home </a>

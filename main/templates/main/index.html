@@ -1,0 +1,10 @@
+<h1> Django Ecommerce <h1>
+{% if user.is_authenticated %}
+<h2>Welcome {{ user.username }}</h2>
+<a href="{% url 'cart:index' %}">Cart</a><br>
+<a href="{% url 'authenticate:logout' %}">Logout</a><br>
+{% else %}
+<a href="{% url 'authenticate:login' %}" >Login</a><br>
+<a href="{% url 'authenticate:register' %}" >Register</a><br>
+{% endif %}
+<a href="{% url 'product:index' %}" >Products</a><br>

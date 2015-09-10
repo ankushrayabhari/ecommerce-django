@@ -1,0 +1,13 @@
+{% if registered %}
+	<h1>Successfully Registered</h1>
+	<a href="{% url 'main:index' %}">Return to home</a>
+
+{% else %}
+	<form action="{% url 'authenticate:register' %}" method="post">
+		{% csrf_token %}
+		{{ userForm.as_p }}
+		{{ customerForm.as_p }}
+		<input type="submit" value="Register" />
+	</form>
+
+{% endif %}

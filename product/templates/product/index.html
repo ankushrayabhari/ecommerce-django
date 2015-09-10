@@ -1,0 +1,10 @@
+<h1> Products: </h1>
+<ul>
+	{% if products %}
+	{% for product in products %}
+		<li><a href="{% url 'product:detail' product.id %}">{{ product.name }}</a></li>
+	{% endfor %}
+	{% endif %}
+</ul>
+<a href="{% url 'cart:index' %}"> Cart </a> <br>
+<a href="{% url 'main:index' %}"> Home </a>
