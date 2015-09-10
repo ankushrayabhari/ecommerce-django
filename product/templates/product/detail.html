@@ -5,10 +5,15 @@
 		{% csrf_token %}
 		<p>{{ product.price }}</p>
 		Quantity: <input type="number" min="1" name="quantity" />
+
+		{% if user.is_authenticated %}
 		<input type="submit" value="Add to Cart" />
+		{% endif %}
 	</form>
 {% endif %}
 
 <a href="{% url 'product:index' %}"> Products </a> <br>
+{% if user.is_authenticated %}
 <a href="{% url 'cart:index' %}"> Cart </a> <br>
+{% endif %}
 <a href="{% url 'main:index' %}"> Home </a>
