@@ -16,7 +16,7 @@
 	            <li><a href="{% url 'cart:index' %}">Cart</a></li>
 
 	            {% if user.is_authenticated %}
-		            <li class="active"><a href="#"> User: {{ user.username }} <span class="sr-only">(current)</span></a></li>
+		            <li class="active"><a style="pointer-events:none;" href="#"> User: {{ user.username }} <span class="sr-only">(current)</span></a></li>
 		            <li><a href="{% url 'authenticate:logout' %}">Logout</a></li>
 	            {% else %}
 		            <li><a href="{% url 'authenticate:login' %}">Login</a></li>
