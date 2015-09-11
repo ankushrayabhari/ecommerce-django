@@ -1,15 +1,40 @@
-{% if registered %}
-	<h1>Successfully Registered</h1>
-	<a href="{% url 'main:index' %}">Return to home</a>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Django Ecommerce</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="{% url 'main:index' %}">Django Ecommerce</a>
+	        </div>
 
-{% else %}
-	<form action="{% url 'authenticate:register' %}" method="post">
-		{% csrf_token %}
-		{{ userForm.as_p }}
-		{{ customerForm.as_p }}
+	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+	          <ul class="nav navbar-nav">
+	            <li><a href="{% url 'cart:index' %}">Cart</a></li>
 
-		Credit Card fields are optional.
-		<input type="submit" value="Register" />
-	</form>
+	            {% if user.is_authenticated %}
+		            <li>{{ user.username }}</li>
+		            <li><a href="{% url 'authenticate:logout' %}">Logout</a></li>
+	            {% else %}
+		            <li><a href="{% url 'authenticate:login' %}">Login</a></li>
+		            <li><a href="{% url 'authenticate:register' %}">Register</a></li>
+	            {% endif %}
 
-{% endif %}
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
+		<div class="container">
+		  	<form action="{% url 'authenticate:register' %}" method="post">
+				{% csrf_token %}
+				{{ userForm.as_p }}
+				<button type="submit" class="btn btn-primary">Register</button>
+			</form>
+		</div>
+	    
+
+	</body>
+</html>

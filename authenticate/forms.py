@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class CustomerRegisterForm(forms.ModelForm):
 	class Meta:
 		model = Customer
-		fields = ['creditcard', 'expiration', 'cvv']
 
 class UserRegisterForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())

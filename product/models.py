@@ -6,6 +6,7 @@ class Product(models.Model):
 	name = models.CharField(max_length=25)
 	description = models.CharField(max_length=3000)
 	price = models.DecimalField(max_digits=8, decimal_places=2)
+	image = models.CharField()
 
 	def __str__(self):
 		return self.name

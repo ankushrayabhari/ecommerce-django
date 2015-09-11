@@ -18,9 +18,9 @@ def login(request):
 				auth.login(request, user)
 				return HttpResponseRedirect(reverse('main:index'))
 			else:
-				return HttpResponse("Your account is disabled. <br> <a href='/'> Return to home page </a>")
+				return render(request, 'authenticate/login.html', {'message': "Your account has been disabled."})
 		else:
-			return HttpResponse("Invalid login details supplied.")
+			return render(request, 'authenticate/login.html', {'message': "Invalid username or password."})
 	else:
 		return render(request, 'authenticate/login.html')
 
@@ -30,24 +30,20 @@ def logout(request):
 	return HttpResponseRedirect(reverse('main:index'))
 
 def register(request):
-	registered = False
 	if request.method == 'POST':
 		userForm = UserRegisterForm(data=request.POST)
-		customerForm = CustomerRegisterForm(data=request.POST)
 
-		if userForm.is_valid() and customerForm.is_valid():
-			user = userForm.save()
-			user.set_password(user.password)
-			user.save()
-			customer = customerForm.save(commit=False)
-			customer.user = user
+		if userForm.is_valid():
+			u = userForm.save()
+			u.set_password(user.password)
+			u.save()
+			customer = Customer(user = u)
 			customer.save()
-			registered = True
+			return render(request, 'authenticate/login.html')
 		else:
-			print(userForm.errors, customerForm.errors)
+			print(userForm.errors)
 
 	else:
 		userForm = UserRegisterForm()
-		customerForm = CustomerRegisterForm()
 
-	return render(request, 'authenticate/register.html', {'userForm': userForm, 'customerForm': customerForm, 'registered': registered})
+	return render(request, 'authenticate/register.html', {'userForm': userForm})

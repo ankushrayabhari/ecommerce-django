@@ -31,7 +31,7 @@ def addToCart(request, id):
 			c = CartItem(quantity=q, customer=request.user.customer)
 			c.save()
 			c.product.add(p)
-		return HttpResponseRedirect(reverse('product:related', args=(p.id,)))
+		return HttpResponseRedirect(reverse('cart:index'))
 
 @login_required
 def update(request, id):
