@@ -40,7 +40,7 @@
 				        	<p>{{ product.price }}</p>
 				        	<form action="{% url 'cart:add' product.id %}" method="post">
 				        		{% csrf_token %}
-								Quantity: <input type="number" min="1" name="quantity" />
+								Quantity: <input type="number" min="1" name="quantity" value="1" />
 								<button type="submit" class="btn btn-primary">Add to Cart</button>
 							</form>
 				      	</div>
