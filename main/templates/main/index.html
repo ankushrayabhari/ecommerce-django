@@ -30,8 +30,8 @@
 		<div class="container">
 		  <div class="row">
 				<div class="col-sm-6 col-md-4">
-					{% if Product.objects.all %}
-						{% for product in Product.objects.all %}
+					{% if products %}
+						{% for product in products %}
 						    <div class="thumbnail">
 						    	<img width="200" height="200" src="{{ product.image }}">
 						      	<div class="caption">

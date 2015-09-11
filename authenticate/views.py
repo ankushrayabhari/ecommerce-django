@@ -35,7 +35,7 @@ def register(request):
 
 		if userForm.is_valid():
 			u = userForm.save()
-			u.set_password(user.password)
+			u.set_password(u.password)
 			u.save()
 			customer = Customer(user = u)
 			customer.save()
